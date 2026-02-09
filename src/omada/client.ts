@@ -34,12 +34,11 @@ export class OmadaClient {
     const res = await this.api.post<
       OmadaResponse<{ accessToken: string; tokenType: string; expiresIn: number }>
     >(
-      `/openapi/authorize/token`,
+      `/openapi/authorize/token?grant_type=client_credentials`,
       {
         omadacId,
         client_id: this.clientId,
         client_secret: this.clientSecret,
-        grant_type: 'client_credentials',
       },
     );
 
