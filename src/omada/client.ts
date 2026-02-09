@@ -34,7 +34,7 @@ export class OmadaClient {
     const res = await this.api.post<
       OmadaResponse<{ accessToken: string; tokenType: string; expiresIn: number }>
     >(
-      `/${omadacId}/openapi/authorize/token`,
+      `/openapi/authorize/token`,
       {
         omadacId,
         client_id: this.clientId,
@@ -54,7 +54,7 @@ export class OmadaClient {
   private async request<T>(method: string, path: string, data?: unknown): Promise<T> {
     await this.ensureAuthenticated();
     const omadacId = await this.fetchOmadacId();
-    const url = `/${omadacId}/openapi/v1/${omadacId}${path}`;
+    const url = `/openapi/v1/${omadacId}${path}`;
 
     const res = await this.api.request<OmadaResponse<T>>({
       method,
