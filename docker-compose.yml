@@ -1,0 +1,20 @@
+services:
+  mcp-omada:
+    build: .
+    container_name: mcp-omada
+    restart: unless-stopped
+    ports:
+      - "3102:3000"
+    environment:
+      - OMADA_URL=
+      - OMADA_CLIENT_ID=
+      - OMADA_CLIENT_SECRET=
+      - MCP_API_KEY=
+      - OAUTH_CLIENT_ID=
+      - OAUTH_CLIENT_SECRET=
+      - PORT=3000
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
