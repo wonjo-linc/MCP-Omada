@@ -60,7 +60,7 @@ export class OmadaClient {
       method,
       url,
       data,
-      headers: { Authorization: `AccessToken ${this.accessToken}` },
+      headers: { Authorization: `AccessToken=${this.accessToken}` },
     });
 
     if (res.data.errorCode !== 0) {
