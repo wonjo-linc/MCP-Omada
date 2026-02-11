@@ -11,6 +11,7 @@ export function registerClientTools(server: McpServer, client: OmadaClient) {
       page: z.number().optional().describe('Page number (default: 1)'),
       pageSize: z.number().optional().describe('Items per page (default: 100)'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId, page, pageSize }) => {
       const result = await client.listClients(siteId, page, pageSize);
       return {
@@ -26,6 +27,7 @@ export function registerClientTools(server: McpServer, client: OmadaClient) {
       siteId: z.string().describe('Site ID'),
       clientMac: z.string().describe('Client MAC address'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId, clientMac }) => {
       const result = await client.getClient(siteId, clientMac);
       return {
@@ -42,6 +44,7 @@ export function registerClientTools(server: McpServer, client: OmadaClient) {
       clientMac: z.string().describe('Client MAC address'),
       action: z.enum(['block', 'unblock']).describe('Action to perform'),
     },
+    { readOnlyHint: false, destructiveHint: true, openWorldHint: true },
     async ({ siteId, clientMac, action }) => {
       if (action === 'block') {
         await client.blockClient(siteId, clientMac);

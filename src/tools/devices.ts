@@ -12,6 +12,7 @@ export function registerDeviceTools(server: McpServer, client: OmadaClient) {
       page: z.number().optional().describe('Page number (default: 1)'),
       pageSize: z.number().optional().describe('Items per page (default: 100)'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId, type, page, pageSize }) => {
       const result = await client.listDevices(siteId, type, page, pageSize);
       return {
@@ -27,6 +28,7 @@ export function registerDeviceTools(server: McpServer, client: OmadaClient) {
       siteId: z.string().describe('Site ID'),
       deviceMac: z.string().describe('Device MAC address'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId, deviceMac }) => {
       const result = await client.getDevice(siteId, deviceMac);
       return {
@@ -43,6 +45,7 @@ export function registerDeviceTools(server: McpServer, client: OmadaClient) {
       deviceMac: z.string().describe('Device MAC address'),
       action: z.enum(['reboot', 'adopt']).describe('Action to perform'),
     },
+    { readOnlyHint: false, destructiveHint: true, openWorldHint: true },
     async ({ siteId, deviceMac, action }) => {
       if (action === 'reboot') {
         await client.rebootDevice(siteId, deviceMac);

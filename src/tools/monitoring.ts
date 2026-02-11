@@ -13,6 +13,7 @@ export function registerMonitoringTools(server: McpServer, client: OmadaClient) 
         .optional()
         .describe('Statistics granularity (default: "hourly")'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId, type }) => {
       const result = await client.getStatistics(siteId, type);
       return {
@@ -29,6 +30,7 @@ export function registerMonitoringTools(server: McpServer, client: OmadaClient) 
       page: z.number().optional().describe('Page number (default: 1)'),
       pageSize: z.number().optional().describe('Items per page (default: 100)'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId, page, pageSize }) => {
       const result = await client.listEvents(siteId, page, pageSize);
       return {
@@ -45,6 +47,7 @@ export function registerMonitoringTools(server: McpServer, client: OmadaClient) 
       page: z.number().optional().describe('Page number (default: 1)'),
       pageSize: z.number().optional().describe('Items per page (default: 100)'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId, page, pageSize }) => {
       const result = await client.listLogs(siteId, page, pageSize);
       return {

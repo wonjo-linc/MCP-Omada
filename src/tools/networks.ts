@@ -9,6 +9,7 @@ export function registerNetworkTools(server: McpServer, client: OmadaClient) {
     {
       siteId: z.string().describe('Site ID'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId }) => {
       const result = await client.listWlans(siteId);
       return {
@@ -23,6 +24,7 @@ export function registerNetworkTools(server: McpServer, client: OmadaClient) {
     {
       siteId: z.string().describe('Site ID'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId }) => {
       const result = await client.listLans(siteId);
       return {
@@ -37,6 +39,7 @@ export function registerNetworkTools(server: McpServer, client: OmadaClient) {
     {
       siteId: z.string().describe('Site ID'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId }) => {
       const result = await client.getWan(siteId);
       return {

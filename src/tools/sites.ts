@@ -7,6 +7,7 @@ export function registerSiteTools(server: McpServer, client: OmadaClient) {
     'omada_get_controller',
     'Get Omada Controller information including version and controller ID.',
     {},
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async () => {
       const info = await client.getControllerInfo();
       return {
@@ -22,6 +23,7 @@ export function registerSiteTools(server: McpServer, client: OmadaClient) {
       page: z.number().optional().describe('Page number (default: 1)'),
       pageSize: z.number().optional().describe('Items per page (default: 100)'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ page, pageSize }) => {
       const result = await client.listSites(page, pageSize);
       return {
@@ -36,6 +38,7 @@ export function registerSiteTools(server: McpServer, client: OmadaClient) {
     {
       siteId: z.string().describe('Site ID'),
     },
+    { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
     async ({ siteId }) => {
       const result = await client.getSite(siteId);
       return {
